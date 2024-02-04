@@ -1,0 +1,80 @@
+body {
+    font-family: Arial;
+    color: white;
+    margin: 0;
+  }
+  
+  .split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+  }
+  
+  .left {
+    left: 0;
+    background-color: #111;
+  }
+
+  .right {
+    right: 0;
+    background-color: white;
+  }
+  
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 31%;
+    left: 30%;
+    
+    width: 50%;
+    height: 38%;
+    width: 40%;
+    background-color: black;
+    opacity: 1;
+    border-radius: 20px;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: flex-end;
+    height: 80%;
+}
+
+
+
+#digitalClock {
+    font-family: 'Roboto', serif; 
+    font-size: 20px; 
+    color: white; 
+}
+
+#stopwatch-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    height: 80%;
+}
+
+#stopwatch {
+    font-family: 'Roboto', serif;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.white-icon {
+    color: white;
+    cursor: pointer;
+}
