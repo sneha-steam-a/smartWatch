@@ -21,7 +21,7 @@ function showStaticMessages() {
         "juliet",
         "Ram"
     ];
-
+    
     messages.forEach(function (message) {
         var messageElement = document.createElement('p');
         messageElement.textContent = message;
@@ -70,7 +70,22 @@ function stopStopwatch() {
     updateStopwatch();
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
+    
+    var musicIcon = document.querySelector('.fas.fa-music');
+    musicIcon.addEventListener('click', function () {
+        var overlay = document.querySelector('.overlay');
+        overlay.innerHTML = '';
+        var musicPlayer = document.createElement('iframe');
+        musicPlayer.src = "https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3";
+        musicPlayer.width = "100%";
+        musicPlayer.height = "100%";
+        musicPlayer.frameBorder = "0";
+        musicPlayer.allowtransparency = "true";
+        musicPlayer.allow = "encrypted-media";
+        overlay.appendChild(musicPlayer);
+    });
    
     var clockIcon = document.querySelector('.fa-regular.fa-clock');
     clockIcon.addEventListener('click', function () {
@@ -109,3 +124,5 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.appendChild(stopwatchContainer);
     });
 });
+
+
