@@ -8,17 +8,16 @@ const apiEndpoint = `${apiUrl}?q=${city},${countryCode}&appid=${apiKey}`;
         try {
             const response = await fetch(apiEndpoint);
             const data = await response.json();
-            const location = `${data.name}, ${data.sys.country}`;
             const weatherIcon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
            
-            document.getElementById('location').textContent = location;
+          
             document.getElementById('weather-icon').src = weatherIcon;
         } catch (error) {
             console.error('Error fetching weather data:', error);
         }
     }
-    fetchWeather();
 fetchWeather();
+
 
 function updateDigitalClock() {
     var now = new Date();
@@ -26,10 +25,9 @@ function updateDigitalClock() {
     var dayOfWeek = daysOfWeek[now.getDay()];
     var hours = now.getHours().toString().padStart(2, '0');
     var minutes = now.getMinutes().toString().padStart(2, '0');
-    var seconds = now.getSeconds().toString().padStart(2, '0');
 
     var digitalClock = document.getElementById('digitalClock');
-    digitalClock.innerHTML = hours + ':' + minutes + ':' + seconds + '<br>' + dayOfWeek;
+    digitalClock.innerHTML = hours + ':' + minutes + '<br>' + dayOfWeek;
 
     setTimeout(updateDigitalClock, 1000);
 }
