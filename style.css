@@ -68,6 +68,9 @@ body {
     font-size: 14px; 
     color: white; 
 }
+.split.left .centered h1 {
+  color: black;
+}
 
 #digitalClockTop {
   position: absolute;
