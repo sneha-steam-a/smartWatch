@@ -2,25 +2,22 @@ const apiKey = 'd210694187a4537f297f350bc54d1ffe';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const city = 'Coimbatore';
 const countryCode = 'India';
-const weatherIcon = '<i class="fas fa-sun"></i>';
 const apiEndpoint = `${apiUrl}?q=${city},${countryCode}&appid=${apiKey}`;
 
-async function fetchWeather() {
-    try {
-        const response = await fetch(apiEndpoint);
-        const data = await response.json();
-        console.log('Weather data:', data);
-
-        const location = `${data.name}, ${data.sys.country}`;
-        console.log('Location:', location);
-        document.getElementById('location').textContent = location;
-        document.getElementById('weather-icon').innerHTML = weatherIcon;
-
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
+    async function fetchWeather() {
+        try {
+            const response = await fetch(apiEndpoint);
+            const data = await response.json();
+            const location = `${data.name}, ${data.sys.country}`;
+            const weatherIcon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+           
+            document.getElementById('location').textContent = location;
+            document.getElementById('weather-icon').src = weatherIcon;
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
     }
-}
-
+    fetchWeather();
 fetchWeather();
 
 function updateDigitalClock() {

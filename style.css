@@ -55,31 +55,28 @@ body {
   display: block;
 }
 
-
 .weather-container {
-  margin-top: 80px;
-  color: white;
-}
-
-.icon-container {
-  margin-top: 40px;
-  display: flex;
-  gap: 40px;
+  text-align: center;
+  margin-top: 30px;
 }
 
 .weather-icon {
-  width: 20px;
-  height: 20px;
-  color: white;
+  width: 50px;
+  height: 50px;
+}
+.icon-container {
+  margin-top: 10px;
+  display: flex;
+  gap: 45px;
 }
 
 
 #digitalClock {
   position:absolute;
-    top: 15%;
-    left: 20%;
+    top: 5%;
+    left: 30%;
     font-family: 'Roboto', serif; 
-    font-size: 20px; 
+    font-size: 15px; 
     color: white; 
 }
 
