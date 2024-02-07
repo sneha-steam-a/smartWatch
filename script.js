@@ -1,7 +1,7 @@
 const apiKey = 'd210694187a4537f297f350bc54d1ffe'; 
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-const city = 'Coimbatore';
-const countryCode = 'India';
+const city = 'nova scotia';
+const countryCode = 'Canada';
 const apiEndpoint = `${apiUrl}?q=${city},${countryCode}&appid=${apiKey}`;
 
     async function fetchWeather() {
@@ -19,38 +19,64 @@ const apiEndpoint = `${apiUrl}?q=${city},${countryCode}&appid=${apiKey}`;
 fetchWeather();
 
 
-function updateDigitalClock() {
-    var now = new Date();
-    var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var dayOfWeek = daysOfWeek[now.getDay()];
-    var hours = now.getHours().toString().padStart(2, '0');
-    var minutes = now.getMinutes().toString().padStart(2, '0');
+function updateDigitalClocks() {
+    var currentDate = new Date();
+    var hours = currentDate.getHours().toString().padStart(2, '0');
+    var minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    var timeString = hours + ':' + minutes;
 
-    var digitalClock = document.getElementById('digitalClock');
-    digitalClock.innerHTML = hours + ':' + minutes + '<br>' + dayOfWeek;
+    var digitalClockElement = document.getElementById('digitalClock');
+    digitalClockElement.textContent = timeString;
+    digitalClockElement.addEventListener('click', function () {
+       
+        window.location.href = "index.html";
+    });
 
-    setTimeout(updateDigitalClock, 1000);
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var dayOfWeek = days[currentDate.getDay()];
+    var digitalClockTopElement = document.getElementById('digitalClockTop');
+    digitalClockTopElement.textContent = dayOfWeek + ' ' + timeString;
 }
+
+setInterval(updateDigitalClocks, 1000);
+
+updateDigitalClocks();
 
 
 function showStaticMessages() {
     var overlay = document.querySelector('.overlay');
+    var digitalClock = overlay.querySelector('#digitalClock');
     overlay.innerHTML = '';
+    overlay.appendChild(digitalClock);
+    document.body.style.backgroundColor = "lightblue";
+
 
     var messages = [
-        "Sneha",
-        "John",
-        "Jackson",
-        "juliet",
-        "Ram"
+        "Heyy Happy day!",
+        "How are you?",
+        "Lets be kind.",
+        "Have a great day"
     ];
 
     messages.forEach(function (message) {
         var messageElement = document.createElement('p');
         messageElement.textContent = message;
+        messageElement.style.color = "black";
+
+       
+        messageElement.addEventListener('click', function () {
+            alert('Clicked on ' + message);
+        });
+
         overlay.appendChild(messageElement);
     });
+
+    overlay.style.backgroundColor = "white"; 
+    document.body.style.backgroundColor = "white"; 
+    digitalClock.style.color = 'black';
+
     overlay.classList.add('visible');
+    
     document.getElementById('musicPlayer').classList.remove('visible');
     document.getElementById('stopwatch-container').classList.remove('visible');
 }
@@ -106,12 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var musicIcon = document.querySelector('.fas.fa-music');
     musicIcon.addEventListener('click', function () {
         var overlay = document.querySelector('.overlay');
+        var digitalClock = overlay.querySelector('#digitalClock');
+
         overlay.innerHTML = '';
-    
+
+       
+        overlay.appendChild(digitalClock);
+
         var musicPlayer = document.createElement('iframe');
         musicPlayer.src = "https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3";
-        musicPlayer.width = "150";
-        musicPlayer.height = "200";
+        musicPlayer.width = "220px";
+        musicPlayer.height = "180px";
         musicPlayer.frameBorder = "0";
         musicPlayer.allowtransparency = "true";
         musicPlayer.allow = "encrypted-media";
@@ -123,7 +154,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var clockIcon = document.querySelector('.fa-regular.fa-clock');
     clockIcon.addEventListener('click', function () {
         var overlay = document.querySelector('.overlay');
+        var digitalClock = overlay.querySelector('#digitalClock');
+
         overlay.innerHTML = '';
+
+        overlay.appendChild(digitalClock);
 
         var stopwatchContainer = document.createElement('div');
         stopwatchContainer.id = 'stopwatch-container';
@@ -157,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.appendChild(stopwatchContainer);
     });
 });
+
 
 // const apiKey = 'd210694187a4537f297f350bc54d1ffe';
 
