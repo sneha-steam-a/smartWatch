@@ -1,14 +1,42 @@
+const apiKey = 'd210694187a4537f297f350bc54d1ffe'; 
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const city = 'Coimbatore';
+const countryCode = 'India';
+const weatherIcon = '<i class="fas fa-sun"></i>';
+const apiEndpoint = `${apiUrl}?q=${city},${countryCode}&appid=${apiKey}`;
+
+async function fetchWeather() {
+    try {
+        const response = await fetch(apiEndpoint);
+        const data = await response.json();
+        console.log('Weather data:', data);
+
+        const location = `${data.name}, ${data.sys.country}`;
+        console.log('Location:', location);
+        document.getElementById('location').textContent = location;
+        document.getElementById('weather-icon').innerHTML = weatherIcon;
+
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+fetchWeather();
+
 function updateDigitalClock() {
     var now = new Date();
+    var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var dayOfWeek = daysOfWeek[now.getDay()];
     var hours = now.getHours().toString().padStart(2, '0');
     var minutes = now.getMinutes().toString().padStart(2, '0');
     var seconds = now.getSeconds().toString().padStart(2, '0');
 
     var digitalClock = document.getElementById('digitalClock');
-    digitalClock.textContent = hours + ':' + minutes + ':' + seconds;
+    digitalClock.innerHTML = hours + ':' + minutes + ':' + seconds + '<br>' + dayOfWeek;
 
-    setTimeout(updateDigitalClock, 1000); 
+    setTimeout(updateDigitalClock, 1000);
 }
+
 
 function showStaticMessages() {
     var overlay = document.querySelector('.overlay');
@@ -21,13 +49,17 @@ function showStaticMessages() {
         "juliet",
         "Ram"
     ];
-    
+
     messages.forEach(function (message) {
         var messageElement = document.createElement('p');
         messageElement.textContent = message;
         overlay.appendChild(messageElement);
     });
+    overlay.classList.add('visible');
+    document.getElementById('musicPlayer').classList.remove('visible');
+    document.getElementById('stopwatch-container').classList.remove('visible');
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     updateDigitalClock();
@@ -35,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var smsIcon = document.querySelector('.fas.fa-sms');
     smsIcon.addEventListener('click', showStaticMessages);
 });
+
+
+
 
 var stopwatchRunning = false;
 var stopwatchInterval;
@@ -77,16 +112,19 @@ document.addEventListener('DOMContentLoaded', function () {
     musicIcon.addEventListener('click', function () {
         var overlay = document.querySelector('.overlay');
         overlay.innerHTML = '';
+    
         var musicPlayer = document.createElement('iframe');
         musicPlayer.src = "https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3";
-        musicPlayer.width = "100%";
-        musicPlayer.height = "100%";
+        musicPlayer.width = "150";
+        musicPlayer.height = "200";
         musicPlayer.frameBorder = "0";
         musicPlayer.allowtransparency = "true";
         musicPlayer.allow = "encrypted-media";
         overlay.appendChild(musicPlayer);
+        overlay.classList.add('visible');
+        document.getElementById('stopwatch-container').classList.remove('visible');
     });
-   
+    
     var clockIcon = document.querySelector('.fa-regular.fa-clock');
     clockIcon.addEventListener('click', function () {
         var overlay = document.querySelector('.overlay');
@@ -124,5 +162,9 @@ document.addEventListener('DOMContentLoaded', function () {
         overlay.appendChild(stopwatchContainer);
     });
 });
+
+// const apiKey = 'd210694187a4537f297f350bc54d1ffe';
+
+
 
 
